@@ -9,6 +9,7 @@ set(DENSITY_PROFILE_COEFFICIENTS_SOURCES
 )
 
 add_library(InputFunctions_DensityProfileCoefficients STATIC ${DENSITY_PROFILE_COEFFICIENTS_SOURCES})
+gmgpolar_set_kokkos_language(InputFunctions_DensityProfileCoefficients)
 target_include_directories(InputFunctions_DensityProfileCoefficients PUBLIC
     ${GMGPOLAR_INCLUDE_DIRS}
 )
