@@ -16,6 +16,7 @@ set(BOUNDARY_CONDITIONS_SOURCES
 )
 
 add_library(InputFunctions_BoundaryConditions STATIC ${BOUNDARY_CONDITIONS_SOURCES})
+gmgpolar_set_kokkos_language(InputFunctions_BoundaryConditions)
 
 target_include_directories(InputFunctions_BoundaryConditions PUBLIC
     ${GMGPOLAR_INCLUDE_DIRS}

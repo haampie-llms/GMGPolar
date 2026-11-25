@@ -2,6 +2,7 @@
 # without access to the source code so they are not installed with the
 # library
 add_executable(gmgpolar main.cpp)
+gmgpolar_set_kokkos_language(gmgpolar)
 target_link_libraries(gmgpolar PRIVATE GMGPolarLib GMGPolarInterface)
 
 # Builds a single-run inner executable (NAME_run) from SOURCE and generates a
@@ -11,6 +12,7 @@ target_link_libraries(gmgpolar PRIVATE GMGPolarLib GMGPolarInterface)
 function(add_scaling_wrapper NAME SOURCE SCRIPT_BODY)
     set(runner_target ${NAME}_run)
     add_executable(${runner_target} ${SOURCE})
+    gmgpolar_set_kokkos_language(${runner_target})
     target_link_libraries(${runner_target} PRIVATE GMGPolarLib GMGPolarInterface)
 
     set(script "${CMAKE_BINARY_DIR}/${NAME}")
@@ -47,4 +49,5 @@ add_scaling_wrapper(weak_scaling   weak_scaling.cpp   "${WEAK_SCALING_BODY}")
 add_scaling_wrapper(strong_scaling strong_scaling.cpp "${STRONG_SCALING_BODY}")
 
 add_executable(convergence_order convergence_order.cpp)
+gmgpolar_set_kokkos_language(convergence_order)
 target_link_libraries(convergence_order PRIVATE GMGPolarLib GMGPolarInterface)

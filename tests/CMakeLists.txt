@@ -25,6 +25,7 @@ set(gmgpolar_test_sources
 include(GoogleTest)
 
 add_executable(gmgpolar_tests ${gmgpolar_test_sources})
+gmgpolar_set_kokkos_language(gmgpolar_tests)
 target_compile_features(gmgpolar_tests PRIVATE cxx_std_20)
 target_link_libraries(gmgpolar_tests GMGPolarLib GMGPolarInterface GTest::gtest)
 

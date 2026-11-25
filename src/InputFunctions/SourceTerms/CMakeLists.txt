@@ -70,6 +70,7 @@ set(SOURCE_TERMS_SOURCES
 )
 
 add_library(InputFunctions_SourceTerms STATIC ${SOURCE_TERMS_SOURCES})
+gmgpolar_set_kokkos_language(InputFunctions_SourceTerms)
 target_include_directories(InputFunctions_SourceTerms PUBLIC
     ${GMGPOLAR_INCLUDE_DIRS}
 )

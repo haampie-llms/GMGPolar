@@ -51,6 +51,22 @@ endif()
 find_package(Kokkos 4.4.1...<6 QUIET REQUIRED)
 gmgpolar_check_required_kokkos_options()
 
+# With Kokkos_ENABLE_COMPILE_AS_CMAKE_LANGUAGE, sources that include Kokkos are
+# compiled with the language Kokkos was built for (CUDA or HIP).
+if(Kokkos_COMPILE_LANGUAGE AND NOT Kokkos_COMPILE_LANGUAGE STREQUAL "CXX")
+    set(CMAKE_${Kokkos_COMPILE_LANGUAGE}_ARCHITECTURES ${Kokkos_${Kokkos_COMPILE_LANGUAGE}_ARCHITECTURES})
+    enable_language(${Kokkos_COMPILE_LANGUAGE})
+    set(CMAKE_${Kokkos_COMPILE_LANGUAGE}_STANDARD ${CMAKE_CXX_STANDARD})
+    set(CMAKE_${Kokkos_COMPILE_LANGUAGE}_STANDARD_REQUIRED True)
+endif()
+
+function(gmgpolar_set_kokkos_language target)
+    if(Kokkos_COMPILE_LANGUAGE AND NOT Kokkos_COMPILE_LANGUAGE STREQUAL "CXX")
+        get_target_property(sources ${target} SOURCES)
+        set_source_files_properties(${sources} PROPERTIES LANGUAGE ${Kokkos_COMPILE_LANGUAGE})
+    endif()
+endfunction()
+
 if(GMGPOLAR_USE_MUMPS)
     find_package(MUMPS REQUIRED COMPONENTS OpenMP METIS)
 endif()
