@@ -28,7 +28,7 @@ endif()
 if (CMAKE_COMPILER_IS_GNUCXX AND CMAKE_BUILD_TYPE STREQUAL "Release")
     # If using GNU increase maximum number of instructions considered for inlining
     # in Release mode in this folder and sub-folders
-    add_compile_options(--param max-inline-insns-single=1500)
+    add_compile_options("$<$<COMPILE_LANGUAGE:CXX>:--param;max-inline-insns-single=1500>")
 endif()
 
 # Set coverage compiler flags - must come before any targets are defined
